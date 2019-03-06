@@ -1,6 +1,11 @@
 export default class Agenda {
-    constructor(tableAgenda){
+    constructor(tableAgenda, tableInfo){
         this._tableAgenda = tableAgenda;
+        this._tableInfo = tableInfo;
+
+        this._numEmployees = 0;
+        this._averageAge = 0;
+        this._sumAge = 0;
     }
 
     addEmployee(employee) {
@@ -14,5 +19,13 @@ export default class Agenda {
         cellEmail.innerHTML = employee.email;
         cellBirthday.innerHTML = employee.getBirthdayAsString();
         cellAge.innerHTML = employee.getAge();
+
+        this._numEmployees++;
+        this._sumAge = this._sumAge + employee.getAge();
+        this._averageAge = this._sumAge / this._numEmployees;
+
+        this._tableInfo.rows[0].cells[1].innerHTML = this._numEmployees;
+
+        this._tableInfo.rows[1].cells[1].innerHTML = this._averageAge.toFixed(1);
     }
 }
